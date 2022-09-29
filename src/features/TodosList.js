@@ -4,6 +4,7 @@ import { getTodos } from "./todos/TodoSlice";
 const TodosList = () => {
   const todos = useSelector((state) => state.todos.entities);
   const dispatch = useDispatch();
+
   const fetchData = () => {
     dispatch(getTodos());
   };
@@ -14,31 +15,34 @@ const TodosList = () => {
      <div className="flex flex-col justify-center">
         <h2 className="text-center text-gray-700 font-semibold text-2xl mt-10">
           Hello!, This are todoslist of user Leanne Graham
-        <h2>from JSONPlaceholder API</h2>
         </h2>
+        <h2 className="text-lg mt-2">from JSONPlaceholder API</h2>
         <button 
-          className="flex mx-auto bg-indigo-500 py-3 px-5 my-8 text-white w-fit rounded-md"
+          className="flex mx-auto bg-indigo-500 py-3 px-5 my-8 text-white w-fit rounded-md font-bold"
           onClick={fetchData}
         >
           Get Data
         </button>
-        <table className="max-w-fit mx-auto">
-          <thead>
+        <table className="max-w-fit mx-auto mb-10">
+          <thead className={`${fetchData === null ? "hidden" : ""}`}>
             <tr className="bg-indigo-800 text-white">
-              <th className="p-2">ID</th>
+              <th className="p-2 px-5 text-center py-4">ID</th>
               <th className="p-2">todos</th>
-              <th className="p-2">Completed</th>
+              <th className="p-2 px-5 text-center">Completed</th>
             </tr>
           </thead>
-          <tbody className="bg-gray-200">
-            {todos.map((todo => {
-              <tr key={todo.id} className="px-2 py-1">
-                <td>{todo.id}</td>
-                <td>{todo.title}</td>
-                <td className={`p-1 rounded-md ${todo.completed === true ? 'bg-green-700' : 'bg-red-600'}`}>
-                  {`${todo.completed === true ? 'done' : 'pending'}`}</td>
+          <tbody className="bg-gray-100 border border-indigo-800">
+            {todos.map((todo => (
+              <tr key={todo.id} className="px-2 py-3 border border-indigo-800">
+                <td className="p-2">{todo.id}</td>
+                <td className="px-5 py-3">{todo.title}</td>
+                <td className="flex justify-end mr-1 items-center py-2">
+                  <p className={`text-white rounded-md py-1 w-24 ${todo.completed === true ? 'bg-green-800' : 'bg-red-700'}`}>
+                  {`${todo.completed}`}
+                  </p>
+                </td>
               </tr>
-            }))}
+            )))}
           </tbody>
         </table>
      </div>
