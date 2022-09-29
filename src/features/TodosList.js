@@ -23,28 +23,30 @@ const TodosList = () => {
         >
           Get Data
         </button>
-        <table className="max-w-fit mx-auto mb-10">
-          <thead className={`${fetchData === null ? "hidden" : ""}`}>
-            <tr className="bg-indigo-800 text-white">
-              <th className="p-2 px-5 text-center py-4">ID</th>
-              <th className="p-2">todos</th>
-              <th className="p-2 px-5 text-center">Completed</th>
-            </tr>
-          </thead>
-          <tbody className="bg-gray-100 border border-indigo-800">
-            {todos.map((todo => (
-              <tr key={todo.id} className="px-2 py-3 border border-indigo-800">
-                <td className="p-2">{todo.id}</td>
-                <td className="px-5 py-3">{todo.title}</td>
-                <td className="flex justify-end mr-1 items-center py-2">
-                  <p className={`text-white rounded-md py-1 w-24 ${todo.completed === true ? 'bg-green-800' : 'bg-red-700'}`}>
-                  {`${todo.completed}`}
-                  </p>
-                </td>
+        <section className="flex justify-center mx-auto">
+          <table className={`max-w-fit md:mx-10 mx-7 mb-10 ${fetchData === null ? "hidden" : ""}`}>
+            <thead className="max-w-fit">
+              <tr className="bg-indigo-800 text-white">
+                <th className="p-2 px-5 text-center py-5">ID</th>
+                <th className="p-2">todos</th>
+                <th className="p-2 px-5 text-center">Completed</th>
               </tr>
-            )))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-gray-100">
+              {todos.map((todo => (
+                <tr key={todo.id} className="px-2 py-3 even:bg-gray-200">
+                  <td className="p-2">{todo.id}</td>
+                  <td className="px-5 py-3">{todo.title}</td>
+                  <td className="flex justify-end mr-1 items-center p-2">
+                    <p className={`text-white rounded-md py-1 w-24 md:scale-100 scale-95 ${todo.completed === true ? 'bg-green-800' : 'bg-red-700'}`}>
+                      {`${todo.completed}`}
+                    </p>
+                  </td>
+                </tr>
+              )))}
+            </tbody>
+          </table>
+        </section>
      </div>
   );
 };
